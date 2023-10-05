@@ -1,0 +1,24 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: projeto-cupons-Jsleiman"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "051415"
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    environment:
+      DATABASE_URL: "postgresql://postgres:051415@postgres:5432/projeto-cupons-Jsleiman/main.py"
+    ports:
+      - "3035:3035"  # Alterando a porta para 3035
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:

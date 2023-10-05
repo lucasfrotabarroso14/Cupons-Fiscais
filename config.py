@@ -1,15 +1,15 @@
 import psycopg2
+
 DATABASE = {
     'database': 'projeto-cupons-Jsleiman',
     'host': 'localhost',
     'user': 'postgres',
     'password': '051415',
-    'port': '5432'
+    'port': '5434'
 }
 
-
-
 def execute_query(query, params=None):
+    conn = None
     try:
         conn = psycopg2.connect(**DATABASE)
         cursor = conn.cursor()
@@ -37,4 +37,5 @@ def execute_query(query, params=None):
         if conn:
             cursor.close()
             conn.close()
+
 
