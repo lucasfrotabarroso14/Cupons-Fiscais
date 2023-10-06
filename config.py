@@ -1,12 +1,13 @@
 import psycopg2
 
 DATABASE = {
-    'database': 'projeto-cupons-Jsleiman',
+    'database': 'exampledb',
     'host': 'localhost',
-    'user': 'postgres',
-    'password': '051415',
-    'port': '5434'
+    'user': 'docker',
+    'password': 'docker',
+    'port': '5440'
 }
+
 
 def execute_query(query, params=None):
     conn = None

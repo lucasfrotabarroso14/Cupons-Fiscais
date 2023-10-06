@@ -1,5 +1,5 @@
 -- Exemplo de init.sql
-CREATE TABLE public.cupons (
+CREATE TABLE cupons (
     codigo_filial TEXT,
     codigo_gerente TEXT,
     codigo_vendedor TEXT,
