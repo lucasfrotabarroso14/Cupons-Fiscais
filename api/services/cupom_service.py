@@ -1,3 +1,6 @@
+import base64
+import io
+
 from config import execute_query
 
 def get_all():
@@ -16,7 +19,7 @@ def get_all():
         return [], 404
 
 
-from config import execute_query
+
 
 def get_cupom_sem_foto():
     query = """
@@ -34,8 +37,20 @@ def get_cupom_sem_foto():
     else:
         return [], 404
 
+def base64_to_blob(base_64_string):
+    try:
+        binary_data = base64.b64decode(base_64_string)
+
+
+
+        return binary_data
+    except Exception as e:
+        print(e)
+        return None
+
 
 def registrar_cupom(cupom_obj):
+    cupom_obj['imagem'] = base64_to_blob(cupom_obj['imagem'])
     # Query para inserir um novo cupom, excluindo a coluna "id" que é autoincrementada
     query_insert = """
     INSERT INTO cupons
@@ -44,6 +59,8 @@ def registrar_cupom(cupom_obj):
     (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
 
     """
+
+
     params = (
         cupom_obj["bandeira_do_cartao"],
         cupom_obj["imagem"],

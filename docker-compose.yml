@@ -9,8 +9,7 @@ services:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: exampledb
-    volumes:
-      - /Users/lucasfrotabarroso/Desktop/projetos/Cupons-Jsleiman/init.sql
+
   adminer:
     image: adminer
     restart: always

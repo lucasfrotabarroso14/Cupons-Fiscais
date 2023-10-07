@@ -10,7 +10,8 @@ from ..utils.Serialize import Serialize
 class CuponsList(Resource):
     def get(self):
         data, status = cupom_service.get_all()
-        if data:
+
+        if status:
             response_data = {
                 "statusCode": 200,
                 "status": True,
