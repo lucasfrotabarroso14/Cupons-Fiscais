@@ -4,11 +4,11 @@ from flask_restx import Api
 from flask_jwt_extended import JWTManager
 import secrets
 
-from api.services import cupom_service
+from api.utils.celery_config import make_celery
 from api.views.cupom_view import CuponsList, CuponsSemFotoList, CuponsDetails
 from api.views.login import LoginList
-from PIL import Image
-import io
+from api.views.task import add_numbers
+
 app = Flask(__name__)
 
 # Dados de conexão
@@ -26,14 +26,18 @@ app.config.from_object('config')
 
 jwt = JWTManager(app)
 
-# def teste_blob(imagem):
 
 
-# cupom_obj = cupom_service.get_by_id(7)
-# primeiro_cupom = cupom_obj[0]  # Acessa o primeiro elemento da lista
-# imagem_teste = primeiro_cupom['imagem']
-# teste_blob(imagem_teste)
+app.config.update(
+    CELERY_BROKER_URL='redis://localhost:6379',
+    CELERY_RESULT_BACKEND='redis://localhost:6379'
+)
+celery = make_celery(app)
 
+
+a = add_numbers.delay(2,3)
+result_value = a.get()
+print(result_value)
 
 
 

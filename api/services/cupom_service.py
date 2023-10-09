@@ -40,10 +40,9 @@ def get_cupom_sem_foto():
 def base64_to_blob(base_64_string):
     try:
         binary_data = base64.b64decode(base_64_string)
+        blob = bytes(binary_data)
+        return blob
 
-
-
-        return binary_data
     except Exception as e:
         print(e)
         return None
