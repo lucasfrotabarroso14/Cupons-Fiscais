@@ -38,6 +38,8 @@ class CuponsList(Resource):
         bandeira_cartao = data.get('bandeira_do_cartao')
         imagem = data.get('imagem',None)
         forma_de_pagamento = data.get('forma_de_pagamento')
+        # status_ocr = data.get("status_ocr")
+        # resultado_ocr = data.get("resultado_ocr")
 
         if not bandeira_cartao or not forma_de_pagamento:
             response_data = {
@@ -63,7 +65,9 @@ class CuponsList(Resource):
             'codigo_gerente':'999055',
             'codigo_vendedor':'023456',
             'data_hora_upload': datetime.today(),
-            'data_hora_aceite': datetime.today()
+            'data_hora_aceite': datetime.today(),
+            "status_ocr" : "Em processamento", #esses dados vao ser pegue do job
+            "resultado_ocr": "valor inicial" #vai ser pegue do job
 
         }
         res, status = cupom_service.registrar_cupom(cupom_obj)

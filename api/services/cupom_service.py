@@ -1,6 +1,7 @@
 import base64
 import io
 
+from api.jobs.ocr_tasks import processar_ocr
 from config import execute_query
 
 def get_all():
@@ -53,9 +54,10 @@ def registrar_cupom(cupom_obj):
     # Query para inserir um novo cupom, excluindo a coluna "id" que é autoincrementada
     query_insert = """
     INSERT INTO cupons
-    (bandeira_do_cartao, imagem, forma_de_pagamento, codigo_pedido_interno, status, nsu, autorizacao, codigo_filial, codigo_gerente, codigo_vendedor, data_hora_upload, data_hora_aceite)
+    (bandeira_do_cartao, imagem, forma_de_pagamento, codigo_pedido_interno, status, nsu, autorizacao, codigo_filial, codigo_gerente, codigo_vendedor, data_hora_upload, data_hora_aceite, status_ocr, resultado_ocr)
     VALUES
-    (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+    (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    RETURNING id;
 
     """
 
@@ -72,19 +74,32 @@ def registrar_cupom(cupom_obj):
         cupom_obj["codigo_gerente"],
         cupom_obj["codigo_vendedor"],
         cupom_obj["data_hora_upload"],
-        cupom_obj["data_hora_aceite"]
+        cupom_obj["data_hora_aceite"],
+        cupom_obj["status_ocr"],
+        cupom_obj["resultado_ocr"]
     )
 
     result, status = execute_query(query_insert, params)
 
-    if status:
-        # Recupere o dado inserido com base em algum critério exclusivo, como o horário de inserção
-        query_select = """
-        SELECT * FROM cupons WHERE data_hora_upload = %s;
-        """
-        select_params = (cupom_obj["data_hora_upload"],)
 
-        result, status = execute_query(query_select, select_params)
+    if status:
+        cupom_id = result #nao estou conseguindo pegar a id me ajude aqui
+        processar_ocr.apply_async(args=[cupom_id],countdown=0)
+
+
+        # Recupere o dado inserido com base em algum critério exclusivo, como o horário de inserção
+        query = """
+           SELECT
+           *
+           FROM
+           cupons
+           WHERE
+           id = %(id)s
+           """
+        params = {"id": cupom_id}
+
+
+        result, status = execute_query(query, params)
 
         if status:
             return result[0], 201

@@ -9,6 +9,8 @@ DATABASE = {
 }
 
 
+import psycopg2
+
 def execute_query(query, params=None):
     conn = None
     try:
@@ -27,8 +29,13 @@ def execute_query(query, params=None):
                 data.append(dict(zip(column_names, row)))
             return data, True
         else:
-            cursor.execute(formatted_query, params)
-            result = cursor.rowcount
+            if "RETURNING" in formatted_query:
+                cursor.execute(formatted_query, params)
+                result = cursor.fetchone()[0]  # Obtém o valor retornado (ID)
+            else:
+                cursor.execute(formatted_query, params)
+                result = cursor.rowcount
+
             conn.commit()
             return result, True
 
@@ -38,5 +45,6 @@ def execute_query(query, params=None):
         if conn:
             cursor.close()
             conn.close()
+
 
 

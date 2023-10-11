@@ -7,7 +7,7 @@ import secrets
 from api.utils.celery_config import make_celery
 from api.views.cupom_view import CuponsList, CuponsSemFotoList, CuponsDetails
 from api.views.login import LoginList
-from api.views.task import add_numbers
+
 
 app = Flask(__name__)
 
@@ -35,9 +35,8 @@ app.config.update(
 celery = make_celery(app)
 
 
-a = add_numbers.delay(2,3)
-result_value = a.get()
-print(result_value)
+
+
 
 
 
