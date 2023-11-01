@@ -4,7 +4,6 @@ from flask_restx import Resource
 from flask import request, jsonify, make_response
 import requests
 from flask_jwt_extended import create_access_token
-
 class LoginList(Resource):
     def post(self):
         login = request.json["login"]
@@ -12,7 +11,7 @@ class LoginList(Resource):
         response = requests.post(validation_url,json={"login": login})
         if response.status_code == 200:
             data = response.json()
-            access_token = create_access_token(identity=data, expires_delta= timedelta(days=1))
+            access_token = create_access_token(identity=data, expires_delta = timedelta(days=1))
             return make_response(jsonify({
                 'message': 'Login realizado com sucesso',
                 'access_token': access_token,

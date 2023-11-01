@@ -66,14 +66,14 @@ class CuponsList(Resource):
             'codigo_vendedor':'023456',
             'data_hora_upload': datetime.today(),
             'data_hora_aceite': datetime.today(),
-            "status_ocr" : "Em processamento", #esses dados vao ser pegue do job
+            "status_ocr": "Em processamento", #esses dados vao ser pegue do job
             "resultado_ocr": "valor inicial" #vai ser pegue do job
 
         }
         res, status = cupom_service.registrar_cupom(cupom_obj)
         if status:
             response_data = {
-                "statusCode": 200,
+                "status_code": 200,
                 "status": True,
                 "message": "Sucesso",
                 "result": res
