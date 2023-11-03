@@ -7,7 +7,7 @@ from flask_jwt_extended import create_access_token
 class LoginList(Resource):
     def post(self):
         login = request.json["login"]
-        validation_url ='https://bk-bi-jsl.guarany.com.br/login'
+        validation_url ='url do servico de login'
         response = requests.post(validation_url,json={"login": login})
         if response.status_code == 200:
             data = response.json()
