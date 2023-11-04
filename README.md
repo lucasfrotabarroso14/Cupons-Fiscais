@@ -19,5 +19,3 @@ CuponsFiscais é uma API que permite que vendedores capturem notas fiscais atrav
 - **PostgreSQL**: Como sistema de gerenciamento de banco de dados.
 - **Redis**: Como broker de mensagens para tarefas assíncronas.
 
-## Configuração e Instalação
-
