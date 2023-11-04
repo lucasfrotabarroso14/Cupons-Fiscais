@@ -17,9 +17,3 @@ CuponsFiscais é uma API que permite que vendedores capturem notas fiscais atrav
 - **PostgreSQL**: Como sistema de gerenciamento de banco de dados.
 - **Redis**: Como broker de mensagens para tarefas assíncronas.
 
-## Instruções de Uso
-
-Para executar o projeto localmente, você precisará ter o Docker e o Docker Compose instalados. Clone o repositório e execute o seguinte comando na raiz do projeto:
-
-```bash
-docker-compose up
