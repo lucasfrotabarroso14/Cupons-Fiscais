@@ -4,7 +4,7 @@ API RESTful desenvolvida em Flask para processamento e gerenciamento de notas fi
 
 ## Descrição
 
-CuponsFiscais é uma API que permite que vendedores capturem notas fiscais através de uma foto. A API utiliza um serviço de OCR (ainda em desenvolvimento) para extrair os dados da nota e atualizá-los no banco de dados. A aplicação utiliza jobs com Redis e utiliza Docker para conteinerizar apenas os serviços de Redis e PostgreSQL, facilitando o desenvolvimento e a implantação.
+A aplicação é uma API que permite que vendedores capturem notas fiscais através de uma foto. A API utiliza um serviço de OCR (ainda em desenvolvimento) para extrair os dados da nota e atualizá-los no banco de dados. A aplicação utiliza jobs com Redis e utiliza Docker para conteinerizar apenas os serviços de Redis e PostgreSQL, facilitando o desenvolvimento e a implantação.
 
 ![Arquitetura CuponsFiscais](https://i.imgur.com/0dCUlk9.png)
 
