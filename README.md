@@ -1,4 +1,4 @@
-# CuponsFiscais
+# API Leitor de Cupons Fiscais
 
 API RESTful desenvolvida em Flask para processamento e gerenciamento de notas fiscais através de OCR.
 
