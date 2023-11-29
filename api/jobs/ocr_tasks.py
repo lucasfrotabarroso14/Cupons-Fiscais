@@ -1,7 +1,6 @@
 from celery import Celery
 import time
-from celery.result import AsyncResult
-# Crie uma instância do Celery
+# Importações e configuração do Celery
 from config import execute_query
 
 celery = Celery(
@@ -10,28 +9,17 @@ celery = Celery(
     backend='redis://localhost:6379/1'  # URL do backend para resultados
 )
 
-status_cr_dict = {}
+@celery.task
 def realizar_ocr(cupom_id):
     try:
-        time.sleep(10)
-        # Retorna um resultado fictício após o atraso
-        return
+        time.sleep(10)  # Simulação do tempo de processamento
+        atualizar_status_ocr(cupom_id, "Concluido", "estado 02 (OCR REALIZADO)")
     except Exception as e:
         atualizar_status_ocr(cupom_id, "Falhou", str(e))
-        raise
 
-@celery.task
 def processar_ocr(cupom_id):
-
-    try:
-        atualizar_status_ocr(cupom_id,"Em processamento","mudou")
-        atualizar_status_ocr(cupom_id,"Concluido","mudou")
-        return
-
-    except Exception as e:
-        atualizar_status_ocr(cupom_id,"Falhou",str(e))
-        return
-
+    atualizar_status_ocr(cupom_id, "Em processamento", "estado 01")
+    realizar_ocr.delay(cupom_id)
 
 def atualizar_status_ocr(cupom_id, status_ocr, resultado_ocr):
     query = """

@@ -13,7 +13,7 @@ class CuponsList(Resource):
 
         if status:
             response_data = {
-                "statusCode": 200,
+                "status_code": 200,
                 "status": True,
                 "message": "Sucesso",
                 "result": data
@@ -24,7 +24,7 @@ class CuponsList(Resource):
 
         else:
             response_data = {
-                "statusCode": 404,
+                "status_code": 404,
                 "status": False,
                 "message": "Erro",
                 "result": data
@@ -43,7 +43,7 @@ class CuponsList(Resource):
 
         if not bandeira_cartao or not forma_de_pagamento:
             response_data = {
-                "statusCode": 404,
+                "status_code": 404,
                 "status": False,
                 "message": "Campos obrigatórios estão faltando na solicitação.",
                 "result": data
@@ -87,7 +87,7 @@ class CuponsDetails(Resource):
         data, status = cupom_service.deletar_cupom(id)
         if status:
             response_data = {
-                "statusCode": 200,
+                "status_code": 200,
                 "status": True,
                 "message": "Sucesso",
                 "result": data
@@ -98,7 +98,7 @@ class CuponsDetails(Resource):
 
         else:
             response_data = {
-                "statusCode": 404,
+                "status_code": 404,
                 "status": False,
                 "message": "Sucesso",
                 "result": data
@@ -111,7 +111,7 @@ class CuponsDetails(Resource):
         data, status = cupom_service.get_by_id(id)
         if status:
             response_data = {
-                "statusCode": 200,
+                "status_code": 200,
                 "status": True,
                 "message": "Sucesso",
                 "result": data
@@ -122,7 +122,7 @@ class CuponsDetails(Resource):
 
         else:
             response_data = {
-                "statusCode": 404,
+                "status_code": 404,
                 "status": False,
                 "message": "Sucesso",
                 "result": data
@@ -138,7 +138,7 @@ class CuponsDetails(Resource):
         forma_de_pagamento = data.get('forma_de_pagamento')
         if not bandeira_cartao or not forma_de_pagamento:
             response_data = {
-                "statusCode": 404,
+                "status_code": 404,
                 "status": False,
                 "message": "Campos obrigatórios estão faltando na solicitação.",
                 "result": data
@@ -148,9 +148,9 @@ class CuponsDetails(Resource):
             return response
 
         cupom_obj = {
-            'bandeira_do_cartao': bandeira_cartao,
+            'bandeira_do_cartao': "teste",
             'imagem': imagem,
-            'forma_de_pagamento': forma_de_pagamento,
+            'forma_de_pagamento': 'teste',
             'codigo_pedido_interno': 'CXA178243HJ',
             'status': 'A',
             'nsu': '20105952',
@@ -166,7 +166,7 @@ class CuponsDetails(Resource):
         data, status =cupom_service.update(id,cupom_obj)
         if status:
             response_data = {
-                "statusCode": 200,
+                "status_code": 200,
                 "status": True,
                 "message": "Sucesso",
                 "result": data
@@ -177,7 +177,7 @@ class CuponsDetails(Resource):
 
         else:
             response_data = {
-                "statusCode": 404,
+                "status_code": 404,
                 "status": False,
                 "message": "Sucesso",
                 "result": data

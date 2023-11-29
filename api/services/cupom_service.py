@@ -1,7 +1,7 @@
 import base64
-import io
 
-from api.jobs.ocr_tasks import processar_ocr
+
+from api.jobs.ocr_tasks import processar_ocr,realizar_ocr
 from config import execute_query
 
 def get_all():
@@ -50,7 +50,7 @@ def base64_to_blob(base_64_string):
 
 
 def registrar_cupom(cupom_obj):
-    cupom_obj['imagem'] = base64_to_blob(cupom_obj['imagem'])
+    # cupom_obj['imagem'] = base64_to_blob(cupom_obj['imagem'])
     # Query para inserir um novo cupom, excluindo a coluna "id" que é autoincrementada
     query_insert = """
     INSERT INTO cupons
@@ -83,8 +83,9 @@ def registrar_cupom(cupom_obj):
 
 
     if status:
-        cupom_id = result #nao estou conseguindo pegar a id me ajude aqui
-        processar_ocr.apply_async(args=[cupom_id],countdown=0)
+        cupom_id = result
+        # processar_ocr.apply_async(args=[cupom_id], countdown=10)
+        processar_ocr(cupom_id)
 
 
         # Recupere o dado inserido com base em algum critério exclusivo, como o horário de inserção

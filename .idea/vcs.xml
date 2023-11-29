@@ -4,5 +4,6 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/CuponsFiscais" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/comprovante-cartao-de-credito-back" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cupons-api" vcs="Git" />
   </component>
 </project>
