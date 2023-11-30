@@ -5,7 +5,9 @@ from flask_jwt_extended import JWTManager
 import secrets
 
 from api.utils.celery_config import make_celery
-from api.views.cupom_view import CuponsList, CuponsSemFotoList, CuponsDetails, cupons_swagger, cupons_sem_imagem_swagger
+from api.views.cupom_ocr_view import CuponsPendentesOCR, cupons_ocr_swagger
+from api.views.cupom_sem_imagem_view import CuponsSemFotoList, cupons_sem_imagem_swagger
+from api.views.cupom_view import CuponsList, CuponsDetails, cupons_swagger
 from api.views.login import LoginList
 
 
@@ -20,6 +22,8 @@ api.add_resource(CuponsList, "/cupons")
 api.add_resource(CuponsDetails,"/cupons/<int:id>")
 api.add_namespace(cupons_swagger)
 
+api.add_resource(CuponsPendentesOCR, "/cupons/ocr")
+api.add_namespace(cupons_ocr_swagger)
 
 
 api.add_resource(CuponsSemFotoList, "/cupons/sem_imagem")

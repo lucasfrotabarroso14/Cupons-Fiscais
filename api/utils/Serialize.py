@@ -2,7 +2,7 @@ import json
 import base64
 from flask import make_response, jsonify
 from flask_restx import Resource
-from api.services import cupom_service
+from api.services import cupons_service
 from datetime import datetime
 
 class Serialize():
