@@ -5,18 +5,27 @@ from flask_jwt_extended import JWTManager
 import secrets
 
 from api.utils.celery_config import make_celery
-from api.views.cupom_view import CuponsList, CuponsSemFotoList, CuponsDetails
+from api.views.cupom_view import CuponsList, CuponsSemFotoList, CuponsDetails, cupons_swagger, cupons_sem_imagem_swagger
 from api.views.login import LoginList
 
 
 app = Flask(__name__)
 
-# Dados de conexão
-api = Api(app)
+SWAGGER_URL = '/swagger'
+
+api = Api(app,  version='1.0', title='Documentação API Cupons', description='API para o aplicativo de Cupons', doc=SWAGGER_URL)
+
 
 api.add_resource(CuponsList, "/cupons")
 api.add_resource(CuponsDetails,"/cupons/<int:id>")
-api.add_resource(CuponsSemFotoList, "/cupons/sem-imagem")
+api.add_namespace(cupons_swagger)
+
+
+
+api.add_resource(CuponsSemFotoList, "/cupons/sem_imagem")
+api.add_namespace(cupons_sem_imagem_swagger)
+
+
 api.add_resource(LoginList,"/login")
 
 

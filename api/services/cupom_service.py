@@ -1,7 +1,7 @@
 import base64
 
 
-from api.jobs.ocr_tasks import processar_ocr,realizar_ocr
+from api.jobs.ocr_tasks import processar_ocr
 from config import execute_query
 
 def get_all():

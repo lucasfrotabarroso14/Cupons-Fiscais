@@ -1,12 +1,17 @@
 import json
 import base64
 from flask import make_response, jsonify, request
-from flask_restx import Resource
+from flask_restx import Resource,Namespace
 from api.services import cupom_service
 from datetime import datetime
 from ..utils.Serialize import Serialize
 
 
+cupons_sem_imagem_swagger = Namespace('cupons/sem_imagem', description='Endpoints para cupons sem imagens')
+cupons_swagger = Namespace('cupons', description='Endpoints para cupons')
+
+
+@cupons_swagger.route('/')
 class CuponsList(Resource):
     def get(self):
         data, status = cupom_service.get_all()
@@ -66,7 +71,7 @@ class CuponsList(Resource):
             'codigo_vendedor':'023456',
             'data_hora_upload': datetime.today(),
             'data_hora_aceite': datetime.today(),
-            "status_ocr": "Em processamento", #esses dados vao ser pegue do job
+            "status_ocr": "Pendente", #esses dados vao ser pegue do job
             "resultado_ocr": "valor inicial" #vai ser pegue do job
 
         }
@@ -82,6 +87,7 @@ class CuponsList(Resource):
             response.headers["Content-Type"] = "application/json"
             return response
 
+@cupons_swagger.route('/<int:id>')
 class CuponsDetails(Resource):
     def delete(self, id):
         data, status = cupom_service.deletar_cupom(id)
@@ -192,7 +198,7 @@ class CuponsDetails(Resource):
 
 
 
-
+@cupons_sem_imagem_swagger.route('/')
 class CuponsSemFotoList(Resource):
     def get(self):
         data, status = cupom_service.get_cupom_sem_foto()
