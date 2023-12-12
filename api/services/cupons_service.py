@@ -180,7 +180,7 @@ def update(id, obj):
 
     if status:
 
-        processar_ocr(id)
+
         query = """
         SELECT
          * 

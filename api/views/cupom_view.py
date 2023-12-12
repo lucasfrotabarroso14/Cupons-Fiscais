@@ -74,7 +74,7 @@ class CuponsList(Resource):
             'data_hora_upload': datetime.today(),
             'data_hora_aceite': datetime.today(),
             "status_ocr": "Pendente",  # esses dados vao ser pegue do job
-            "resultado_ocr": "valor inicial"  # vai ser pegue do job
+            "resultado_ocr": None  # vai ser pegue do job
 
         }
         # cupom_obj = {
