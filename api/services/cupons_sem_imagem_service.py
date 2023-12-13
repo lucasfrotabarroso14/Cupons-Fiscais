@@ -19,3 +19,20 @@ def get_cupom_sem_foto():
         return result, 200
     else:
         return [], 404
+
+def get_cupom_sem_imagem_by_id(id):
+    query = """
+    SELECT
+    *
+    FROM
+    cupons
+    WHERE
+    id = %(id)s
+    """
+    params={"id": id}
+    result, status = execute_query(query, params)
+
+    if status:
+        return result, 200
+    else:
+        return [], 404

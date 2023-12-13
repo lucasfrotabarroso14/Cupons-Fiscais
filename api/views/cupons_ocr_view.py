@@ -37,11 +37,14 @@ class CuponsPendentesOCR(Resource):
             response.headers['Content-Type'] = 'application/json'
             return response
 
+@cupons_ocr_swagger.route('/<int:id>')
 class CuponsPendentesDetail(Resource):
-    def put(self,id): # set do esau
+    def put(self,id):
         data = request.get_json()
         imagem = data.get('imagem')
         resultado_ocr = data.get('resultado_ocr')
+        data_hora_upload = data.get('data_hora_upload')
+
 
         if not resultado_ocr:
             response_data = {
@@ -65,7 +68,7 @@ class CuponsPendentesDetail(Resource):
             'codigo_filial': '02',
             'codigo_gerente': '999055',
             'codigo_vendedor': '023456',
-            'data_hora_upload': datetime.today(),
+            'data_hora_upload': data_hora_upload,
             'data_hora_aceite': datetime.today(),
             'status_ocr':'concluido',
             'resultado_ocr': resultado_ocr
