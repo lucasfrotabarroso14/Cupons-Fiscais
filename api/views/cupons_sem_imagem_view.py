@@ -10,7 +10,7 @@ from ..utils.Serialize import Serialize
 
 
 
-cupons_sem_imagem_swagger = Namespace('cupons/sem_imagem', description='Endpoints para cupons sem imagens ')
+cupons_sem_imagem_swagger = Namespace('cupons/sem_imagem', description='Endpoints para o Front-End (cupons sem imagem) ')
 
 @cupons_sem_imagem_swagger.route('/')
 class CuponsSemFotoList(Resource):
