@@ -7,7 +7,7 @@ from config import execute_query
 
 def get_cupons_pendentes_ocr():
     query = """
-    SELECT id,imagem, status_ocr, resultado_ocr
+    SELECT id,imagem, status_ocr, resultado_ocr,data_hora_upload
     FROM CUPONS
     WHERE
     status_ocr = 'pendente' 
@@ -17,6 +17,23 @@ def get_cupons_pendentes_ocr():
     
     """
     result, status = execute_query(query, {})
+    if status:
+        return result, 200
+    else:
+        return [], 404
+
+def get_cupons_pendentes_ocr_by_id(id):
+    query = """
+    SELECT
+    id,imagem, status_ocr, resultado_ocr,data_hora_upload
+    FROM
+    cupons
+    WHERE
+    id = %(id)s
+    """
+    params={"id": id}
+    result, status = execute_query(query, params)
+
     if status:
         return result, 200
     else:
@@ -70,7 +87,7 @@ def update(id, obj):
 
         query = """
         SELECT
-         id,status_ocr,resultado_ocr 
+         id,status_ocr,resultado_ocr,data_hora_aceite
          FROM
         cupons 
         WHERE 

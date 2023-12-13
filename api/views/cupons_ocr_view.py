@@ -39,6 +39,31 @@ class CuponsPendentesOCR(Resource):
 
 @cupons_ocr_swagger.route('/<int:id>')
 class CuponsPendentesDetail(Resource):
+    def get(self,id):
+        data, status = cupons_ocr_service.get_cupons_pendentes_ocr_by_id(id)
+        if status:
+            response_data = {
+                "status_code": 200,
+                "status": True,
+                "message": "Sucesso",
+                "result": data
+            }
+            response = make_response(json.dumps(response_data, default=Serialize.serialize), 200)
+            response.headers["Content-Type"] = "application/json"
+            return response
+
+        else:
+            response_data = {
+                "status_code": 404,
+                "status": False,
+                "message": "Sucesso",
+                "result": data
+            }
+            response = make_response(json.dumps(response_data), 404)
+            response.headers['Content-Type'] = 'application/json'
+            return response
+
+
     def put(self,id):
         data = request.get_json()
         imagem = data.get('imagem')
